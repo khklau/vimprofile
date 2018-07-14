@@ -20,7 +20,7 @@ let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
 """""
 """ Plugin management
 """""
-call plug#begin('~/.vim/plugged')
+call plug#begin('.config/nvim/autoload')
 Plug 'vim-airline/vim-airline'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'tomasr/molokai'
@@ -91,8 +91,6 @@ set hidden            " Required for operations modifying multiple buffers like 
 let g:LanguageClient_serverCommands = {
     \ 'cpp': ['clangd']
     \ }
-let g:LanguageClient_autoStart = 1
-let g:LanguageClient_trace = 'verbose'
 let g:LanguageClient_loggingFile = '/tmp/LanguageClient.log'
 let g:LanguageClient_loggingLevel = 'INFO'
 let g:LanguageClient_serverStderr = '/tmp/LanguageServer.log'
