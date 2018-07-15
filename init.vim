@@ -20,7 +20,7 @@ let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
 """""
 """ Plugin management
 """""
-call plug#begin('.config/nvim/autoload')
+call plug#begin('~/.config/nvim/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'tomasr/molokai'
@@ -28,7 +28,6 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'sakhnik/nvim-gdb'
 Plug 'ajh17/vimcompletesme'
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 call plug#end()
 
 
@@ -84,13 +83,24 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 
 
 """""
+""" VimCompletesMe
+"""""
+autocmd FileType cpp let b:vcm_tab_complete = 'omni'
+
+
+"""""
 """ LanguageClient-neovim
 """""
-let g:deoplete#enable_at_startup = 1
 set hidden            " Required for operations modifying multiple buffers like rename.
+let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
-    \ 'cpp': ['clangd']
+    \ 'cpp': ['cquery', '--log-file=/tmp/cquery.log', '--init={"cacheDirectory":"~/.cquery/"}', '--language-server'],
     \ }
+autocmd FileType cpp setlocal omnifunc=LanguageClient#complete
 let g:LanguageClient_loggingFile = '/tmp/LanguageClient.log'
 let g:LanguageClient_loggingLevel = 'INFO'
 let g:LanguageClient_serverStderr = '/tmp/LanguageServer.log'
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+nnoremap <silent> lh :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> ld :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> lr :call LanguageClient#textDocument_rename()<CR>
