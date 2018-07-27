@@ -64,7 +64,7 @@ colorscheme molokai
 """ VimFiler
 """""
 let g:vimfiler_as_default_explorer = 1
-nnoremap <silent> ve :<C-U>VimFiler -explorer -parent -buffer-name=explorer -split -simple -winwidth=35 -no-quit<CR>
+nnoremap <silent> ve :<C-U>VimFiler -explorer -parent -buffer-name=vimfiler -split -simple -winwidth=35 -no-quit<CR>
 
 
 """""
