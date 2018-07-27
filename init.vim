@@ -11,7 +11,7 @@ set exrc
 set shiftwidth=4
 set tabstop=8
 set softtabstop=4
-set noexpandtab
+set expandtab
 syntax enable
 set t_Co=256
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
@@ -27,6 +27,8 @@ Plug 'tomasr/molokai'
 Plug 'altercation/vim-colors-solarized'
 Plug 'sakhnik/nvim-gdb'
 Plug 'ajh17/vimcompletesme'
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/vimfiler.vim'
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 call plug#end()
 
@@ -56,6 +58,13 @@ colorscheme molokai
 "set background=light
 "let g:solarized_termcolors=256
 "colorscheme solarized
+
+
+"""""
+""" VimFiler
+"""""
+let g:vimfiler_as_default_explorer = 1
+nnoremap <silent> ve :<C-U>VimFiler -explorer -parent -buffer-name=explorer -split -simple -winwidth=35 -no-quit<CR>
 
 
 """""
@@ -94,7 +103,7 @@ autocmd FileType cpp let b:vcm_tab_complete = 'omni'
 set hidden            " Required for operations modifying multiple buffers like rename.
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
-    \ 'cpp': ['cquery', '--log-file=/tmp/cquery.log', '--init={"cacheDirectory":"~/.cquery/"}', '--language-server'],
+    \ 'cpp': ['cquery', '--log-file=/tmp/cquery.log', '--init={"cacheDirectory":"' . $HOME . '/.cquery/"}', '--language-server'],
     \ }
 autocmd FileType cpp setlocal omnifunc=LanguageClient#complete
 let g:LanguageClient_loggingFile = '/tmp/LanguageClient.log'
