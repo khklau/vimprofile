@@ -40,6 +40,19 @@ call plug#end()
 
 
 """""
+""" C++ Development
+"""""
+let &makeprg = "rm -rf build.status build bin include lib && WAF_ROOT=`pwd` bear ./waf --mode=debug --prefix=`pwd` prepare configure build install"
+" automatically open the quickfix window whenever any commands populate it and are qualified matches
+augroup qf
+    autocmd!
+    autocmd QuickFixCmdPost [^l]* cwindow
+    autocmd QuickFixCmdPost l*    cwindow
+    autocmd VimEnter        *     cwindow
+augroup END
+
+
+"""""
 """ Python3 provider
 """""
 let g:python3_host_prog = '/usr/bin/python3'
@@ -102,6 +115,7 @@ autocmd FileType cpp let b:vcm_tab_complete = 'omni'
 """""
 set hidden            " Required for operations modifying multiple buffers like rename.
 let g:LanguageClient_autoStart = 1
+let g:LanguageClient_diagnosticsList = "location"
 let g:LanguageClient_serverCommands = {
     \ 'cpp': ['cquery', '--log-file=/tmp/cquery.log', '--init={"cacheDirectory":"' . $HOME . '/.cquery/"}', '--language-server'],
     \ }
