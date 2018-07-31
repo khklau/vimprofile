@@ -46,11 +46,10 @@ let &makeprg = "rm -rf build.status build bin include lib && WAF_ROOT=`pwd` bear
 " automatically open the quickfix window whenever any commands populate it and are qualified matches
 augroup qf
     autocmd!
-    autocmd QuickFixCmdPost [^l]* cwindow
-    autocmd QuickFixCmdPost l*    cwindow
-    autocmd VimEnter        *     cwindow
+    autocmd QuickFixCmdPost [^l]* cwindow 20
+    autocmd QuickFixCmdPost l*    cwindow 20
+    autocmd VimEnter        *     cwindow 20
 augroup END
-
 
 """""
 """ Python3 provider
