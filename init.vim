@@ -18,6 +18,12 @@ let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
 
 
 """""
+""" Jump list settings
+"""""
+nnoremap <silent> <C-p> <C-o><bar>:bd#<CR>
+
+
+"""""
 """ Plugin management
 """""
 call plug#begin('~/.config/nvim/plugged')
@@ -42,7 +48,7 @@ call plug#end()
 """""
 """ C++ Development
 """""
-let &makeprg = "rm -rf build.status build bin include lib && WAF_ROOT=`pwd` bear ./waf --mode=debug --prefix=`pwd` prepare configure build install"
+let &makeprg = "rm -rf build.status build bin include lib && WAF_ROOT=`pwd` bear ./waf -v --mode=debug --prefix=`pwd` prepare configure build install"
 " automatically open the quickfix window whenever any commands populate it and are qualified matches
 augroup qf
     autocmd!
@@ -50,6 +56,7 @@ augroup qf
     autocmd QuickFixCmdPost l*    cwindow 20
     autocmd VimEnter        *     cwindow 20
 augroup END
+
 
 """""
 """ Python3 provider
