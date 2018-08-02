@@ -6,6 +6,23 @@ set exrc
 
 
 """""
+""" Plugin management
+"""""
+call plug#begin('~/.config/nvim/plugged')
+Plug 'vim-airline/vim-airline'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'tomasr/molokai'
+Plug 'altercation/vim-colors-solarized'
+Plug 'sakhnik/nvim-gdb'
+Plug 'ajh17/vimcompletesme'
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/vimfiler.vim'
+Plug 'romainl/vim-qf'
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+call plug#end()
+
+
+"""""
 """ Text editing settings
 """""
 set shiftwidth=4
@@ -24,22 +41,6 @@ nnoremap <silent> <C-p> <C-o><bar>:bd#<CR>
 
 
 """""
-""" Plugin management
-"""""
-call plug#begin('~/.config/nvim/plugged')
-Plug 'vim-airline/vim-airline'
-Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'tomasr/molokai'
-Plug 'altercation/vim-colors-solarized'
-Plug 'sakhnik/nvim-gdb'
-Plug 'ajh17/vimcompletesme'
-Plug 'Shougo/unite.vim'
-Plug 'Shougo/vimfiler.vim'
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
-call plug#end()
-
-
-"""""
 """ Terminal settings
 """""
 :tnoremap <Esc> <C-\><C-n>
@@ -48,14 +49,15 @@ call plug#end()
 """""
 """ C++ Development
 """""
-let &makeprg = "rm -rf build.status build bin include lib && WAF_ROOT=`pwd` bear ./waf -v --mode=debug --prefix=`pwd` prepare configure build install"
-" automatically open the quickfix window whenever any commands populate it and are qualified matches
-augroup qf
-    autocmd!
-    autocmd QuickFixCmdPost [^l]* cwindow 20
-    autocmd QuickFixCmdPost l*    cwindow 20
-    autocmd VimEnter        *     cwindow 20
-augroup END
+let &makeprg = "rm -rf build.status build bin include lib && WAF_ROOT=`pwd` bear ./waf --mode=debug --prefix=`pwd` prepare configure build install"
+
+
+"""""
+""" Vim-Qf
+""""
+let g:qf_max_height = 20
+nnoremap <silent> cn :cnext<CR>
+nnoremap <silent> cp :cprevious<CR>
 
 
 """""
@@ -83,22 +85,7 @@ colorscheme molokai
 """ VimFiler
 """""
 let g:vimfiler_as_default_explorer = 1
-nnoremap <silent> ve :<C-U>VimFiler -explorer -parent -buffer-name=vimfiler -split -simple -winwidth=35 -no-quit<CR>
-
-
-"""""
-""" Netrw
-"""""
-" Tree view
-let g:netrw_liststyle = 3
-" Remove banner
-let g:netrw_banner = 0
-" Open files in previous window
-let g:netrw_browse_split = 4
-" Window size 20%
-let g:netrw_winsize = 20
-" Don't write errors to a new window
-let g:netrw_use_errorwindow = 0
+nnoremap <silent> ve :<C-U>VimFiler -explorer -parent -buffer-name=vimfiler -split -simple -find -winwidth=35 -no-quit<CR>
 
 
 """""
