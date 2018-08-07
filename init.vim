@@ -41,6 +41,27 @@ nnoremap <silent> <C-p> <C-o><bar>:bd#<CR>
 
 
 """""
+""" Grep settings
+"""""
+command! -nargs=+ Grep execute 'silent grep! -I <args>'
+
+
+"""""
+""" File finding
+"""""
+" find files and populate the quickfix list
+fun! FindFiles(...)
+  let error_file = tempname()
+  silent exe '!find '.join(a:000, ' ').' | xargs file | sed "s/:/:1:/" > '.error_file
+  set errorformat=%f:%l:%m
+  exe "cgetfile ". error_file
+  copen
+  call delete(error_file)
+endfun
+command! -nargs=+ Find call FindFiles(<f-args>)
+
+
+"""""
 """ Terminal settings
 """""
 :tnoremap <Esc> <C-\><C-n>
