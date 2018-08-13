@@ -43,7 +43,7 @@ nnoremap <silent> <C-p> <C-o><bar>:bd#<CR>
 """""
 """ Grep settings
 """""
-ca Grep grep! -I 
+cab Grep grep! -I
 
 
 """""
@@ -71,7 +71,7 @@ command! -nargs=+ Find call FindFiles(<f-args>)
 """ C++ Development
 """""
 let &makeprg = "rm -rf build.status build bin include lib && WAF_ROOT=`pwd` bear ./waf --mode=debug --prefix=`pwd` prepare configure build install"
-ca Make make!
+cab Make make!
 
 
 """""
