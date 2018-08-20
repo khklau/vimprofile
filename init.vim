@@ -9,16 +9,16 @@ set exrc
 """ Plugin management
 """""
 call plug#begin('~/.config/nvim/plugged')
-Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline', { 'tag': 'v0.9' }
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'tomasr/molokai'
 Plug 'altercation/vim-colors-solarized'
 Plug 'sakhnik/nvim-gdb'
-Plug 'ajh17/vimcompletesme'
-Plug 'Shougo/unite.vim'
-Plug 'Shougo/vimfiler.vim'
-Plug 'romainl/vim-qf'
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+Plug 'ajh17/vimcompletesme', { 'tag': '*', 'track': 'tags' }
+Plug 'Shougo/unite.vim', { 'tag': 'ver6.3' }
+Plug 'Shougo/vimfiler.vim', { 'tag': 'ver4.2' }
+Plug 'romainl/vim-qf', { 'tag': '0.2.0' }
+Plug 'autozimu/LanguageClient-neovim', { 'tag': '*', 'track': 'tags', 'do': 'bash install.sh' }
 call plug#end()
 
 
@@ -139,7 +139,9 @@ autocmd FileType cpp setlocal omnifunc=LanguageClient#complete
 let g:LanguageClient_loggingFile = '/tmp/LanguageClient.log'
 let g:LanguageClient_loggingLevel = 'INFO'
 let g:LanguageClient_serverStderr = '/tmp/LanguageServer.log'
+let g:LanguageClient_selectionUI = 'quickfix'
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-nnoremap <silent> lh :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> lv :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> ld :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> lf :call LanguageClient#textDocument_references() \| copen<CR>
 nnoremap <silent> lr :call LanguageClient#textDocument_rename()<CR>
