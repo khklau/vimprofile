@@ -15,8 +15,8 @@ Plug 'tomasr/molokai'
 Plug 'altercation/vim-colors-solarized'
 Plug 'sakhnik/nvim-gdb'
 Plug 'ajh17/vimcompletesme', { 'tag': '*', 'track': 'tags' }
-Plug 'Shougo/unite.vim', { 'tag': 'ver6.3' }
-Plug 'Shougo/vimfiler.vim', { 'tag': 'ver4.2' }
+Plug 'Shougo/unite.vim', { 'tag': 'ver.6.3' }
+Plug 'Shougo/vimfiler.vim', { 'tag': 'ver.4.2' }
 Plug 'romainl/vim-qf', { 'tag': '0.2.0' }
 Plug 'autozimu/LanguageClient-neovim', { 'tag': '*', 'track': 'tags', 'do': 'bash install.sh' }
 call plug#end()
