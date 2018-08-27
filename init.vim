@@ -13,8 +13,9 @@ Plug 'vim-airline/vim-airline', { 'tag': 'v0.9' }
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'tomasr/molokai'
 Plug 'altercation/vim-colors-solarized'
-Plug 'sakhnik/nvim-gdb'
 Plug 'ajh17/vimcompletesme', { 'tag': '*', 'track': 'tags' }
+Plug 'idanarye/vim-vebugger',  { 'tag': '*', 'track': 'tags' }
+Plug 'Shougo/vimproc.vim', { 'tag': 'ver.9.3', 'do' : 'make' }
 Plug 'Shougo/unite.vim', { 'tag': 'ver.6.3' }
 Plug 'Shougo/vimfiler.vim', { 'tag': 'ver.4.2' }
 Plug 'romainl/vim-qf', { 'tag': '0.2.0' }
@@ -127,6 +128,24 @@ autocmd FileType cpp let b:vcm_tab_complete = 'omni'
 
 
 """""
+""" Vebugger GDB
+"""""
+nnoremap <silent> dn :VBGstepOver<CR>
+nnoremap <silent> di :VBGstepIn<CR>
+nnoremap <silent> do :VBGstepOut<CR>
+nnoremap <silent> dc :VBGcontinue<CR>
+nnoremap <silent> db :VBGtoggleBreakpointThisLine<CR>
+nnoremap <silent> dn :VBGclearBreakpints<CR>
+nnoremap <silent> dt :VBGtoggleTerminalBuffer<CR>
+nnoremap <silent> dk :VBGkill<CR>
+cab Vdbs VBGstartGDB
+cab Vdba VBGattachGDB
+cab Vdbv VBGeval
+cab Vdbx VBGexecute
+cab Vdbc VBGrawWrite
+
+
+"""""
 """ LanguageClient-neovim
 """""
 set hidden            " Required for operations modifying multiple buffers like rename.
@@ -143,5 +162,5 @@ let g:LanguageClient_selectionUI = 'quickfix'
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> lv :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> ld :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> lf :call LanguageClient#textDocument_references() \| copen<CR>
+nnoremap <silent> lf :call LanguageClient#textDocument_references() <bar> copen<CR>
 nnoremap <silent> lr :call LanguageClient#textDocument_rename()<CR>
