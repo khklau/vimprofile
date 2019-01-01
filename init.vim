@@ -14,7 +14,6 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'tomasr/molokai'
 Plug 'altercation/vim-colors-solarized'
 Plug 'ajh17/vimcompletesme', { 'tag': '*', 'track': 'tags' }
-Plug 'idanarye/vim-vebugger',  { 'tag': '*', 'track': 'tags' }
 Plug 'Shougo/vimproc.vim', { 'tag': 'ver.9.3', 'do' : 'make' }
 Plug 'Shougo/unite.vim', { 'tag': 'ver.6.3' }
 Plug 'Shougo/vimfiler.vim', { 'tag': 'ver.4.2' }
@@ -128,24 +127,6 @@ autocmd FileType cpp let b:vcm_tab_complete = 'omni'
 
 
 """""
-""" Vebugger GDB
-"""""
-nnoremap <silent> dn :VBGstepOver<CR>
-nnoremap <silent> di :VBGstepIn<CR>
-nnoremap <silent> do :VBGstepOut<CR>
-nnoremap <silent> dc :VBGcontinue<CR>
-nnoremap <silent> db :VBGtoggleBreakpointThisLine<CR>
-nnoremap <silent> dn :VBGclearBreakpints<CR>
-nnoremap <silent> dt :VBGtoggleTerminalBuffer<CR>
-nnoremap <silent> dk :VBGkill<CR>
-cab Vdbs VBGstartGDB
-cab Vdba VBGattachGDB
-cab Vdbv VBGeval
-cab Vdbx VBGexecute
-cab Vdbc VBGrawWrite
-
-
-"""""
 """ LanguageClient-neovim
 """""
 set hidden            " Required for operations modifying multiple buffers like rename.
@@ -153,6 +134,7 @@ let g:LanguageClient_autoStart = 1
 let g:LanguageClient_diagnosticsList = "location"
 let g:LanguageClient_serverCommands = {
     \ 'cpp': ['cquery', '--log-file=/tmp/cquery.log', '--init={"cacheDirectory":"' . $HOME . '/.cquery/"}', '--language-server'],
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
     \ }
 autocmd FileType cpp setlocal omnifunc=LanguageClient#complete
 let g:LanguageClient_loggingFile = '/tmp/LanguageClient.log'
